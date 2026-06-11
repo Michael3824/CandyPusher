@@ -16,6 +16,6 @@ public class Pusher : MonoBehaviour
     void Update()
     {
         float z = Mathf.Sin(Time.time * speed) * movepower;
-        rb.linearVelpcitya = new Vector3(0, 0, z);)
+        rb.linearVelocity = new Vector3(0, 0, z);
     }
 }
