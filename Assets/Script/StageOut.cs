@@ -9,6 +9,7 @@ public class StageOut : MonoBehaviour
     // 1.StageOutクラスの中に変数　Scoreを作成
     private int Score;
     public Text scoreText;
+    public TMPro.TextMeshProUGUI scoreTextTMP;
     // 2.変数 Score は int型　かつ　private であること
     // 3.オブジェクトがすり抜けたら(OutTriggerEnterが呼ばれたら)変数 Scoreに1加算する
 
@@ -21,7 +22,7 @@ public class StageOut : MonoBehaviour
         //Score = Score + 1;
         Score += 1;
         Debug.Log($"Score:{Score}");
-        scoreText.text = $"Score:{Score}";
+        scoreTextTMP.text = $"Score:{Score}";
         //変数名 otherってなに？
         //A.すり抜けた相手のコライダー情報
         Debug.Log($"{other.name}がすり抜けました。");

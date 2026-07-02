@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Pusher : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class Pusher : MonoBehaviour
     void Start()  
     {
         startPosition = this.transform.position;
-        Debug.Log("ƒQ[ƒ€‚ªŠJn‚µ‚½‚æ");
+        Debug.Log("ã‚²ãƒ¼ãƒ ãŒé–‹å§‹ã—ãŸã‚ˆ");
     }
     public Rigidbody rb; 
     // Update is called once per frame
