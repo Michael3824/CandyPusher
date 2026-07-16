@@ -34,5 +34,13 @@ public class StageOut : MonoBehaviour
         //Destory(破棄したいオブジェクト)
         //オブジェクトが使用しているメモリの開放(ガベージコレクション)と描画情報の破棄
         Destroy(other.gameObject);
+
+        if (Score > 10)
+        {
+            if (audioManager.bgmAudioSource.clip != audioManager.bgmAudioClips[1])
+            
+            audioManager.bgmAudioSource.clip = audioManager.bgmAudioClips[1];
+            audioManager.bgmAudioSource.Play();
+        }
     }
 }
