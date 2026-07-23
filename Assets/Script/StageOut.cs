@@ -4,25 +4,13 @@ using UnityEngine.UI;
 public class StageOut : MonoBehaviour
 
 {
-    // 来週の頭(一限)に適当に選んだ３人を当てる予定
-    // 要件定義：StageOutクラスの中に変数 Scoreを作成、オブジェクトがすり抜けたらScoreを1加算する
-    // 1.StageOutクラスの中に変数　Scoreを作成
     private int Score;
     public Text scoreText;
     public TMPro.TextMeshProUGUI scoreTextTMP;
-    // 2.変数 Score は int型　かつ　private であること
-    // 3.オブジェクトがすり抜けたら(OutTriggerEnterが呼ばれたら)変数 Scoreに1加算する
-
-    // 4.加算後の変数 ScoreをDebug.Logでコンソール上に出力する
-
-    //このコードがアタッチされているオブジェクトのisTrigger(コライダー設定)が有効
-    //かつ他のオブジェクトがすり抜けた時に中の処理を行うイベント関数
-    public AudioManager audioManager; 
-
     
     void OnTriggerEnter(Collider other)
     {
-        audioManager.PlaySE();
+        AudioManager.instance.PlaySE();
         //Score = Score + 1;
         Score += 1;
         Debug.Log($"Score:{Score}");
@@ -35,12 +23,15 @@ public class StageOut : MonoBehaviour
         //オブジェクトが使用しているメモリの開放(ガベージコレクション)と描画情報の破棄
         Destroy(other.gameObject);
 
+ 
+        //スコアが10より大きくなった時に発動する
         if (Score > 10)
         {
-            if (audioManager.bgmAudioSource.clip != audioManager.bgmAudioClips[1])
+            // != (右辺と左辺の値が同じでなかったら)
+            if (AudioManager.instance.bgmAudioSource.clip != AudioManager.instance.bgmAudioClips[1])
             
-            audioManager.bgmAudioSource.clip = audioManager.bgmAudioClips[1];
-            audioManager.bgmAudioSource.Play();
+            AudioManager.instance.bgmAudioSource.clip = AudioManager.instance.bgmAudioClips[1];
+            AudioManager.instance.bgmAudioSource.Play();
         }
     }
 }
