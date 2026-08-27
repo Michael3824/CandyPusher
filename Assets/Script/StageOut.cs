@@ -1,37 +1,49 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class StageOut : MonoBehaviour
-
 {
     private int Score;
     public Text scoreText;
     public TMPro.TextMeshProUGUI scoreTextTMP;
-    
+
     void OnTriggerEnter(Collider other)
     {
+        // ğŸŒŸã€é‡è¦ã€‘è½ã¡ã¦ããŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã€ŒCandyã€ã‚¿ã‚°ã‚’æŒã£ã¦ã„ã‚‹æ™‚ã ã‘å‡¦ç†ã™ã‚‹
+        if (other.gameObject.CompareTag("Candy"))
+        {
+            // ã‚¹ãƒ­ãƒƒãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã‚’è¦‹ã¤ã‘ã¦ã€ã‚­ãƒ£ãƒ³ãƒ‡ã‚£ãƒ¼ãŒè½ã¡ãŸã‚ˆï¼ã¨ä¼ãˆã‚‹
+            SlotManager slot = FindFirstObjectByType<SlotManager>();
+            if (slot != null)
+            {
+                slot.OnCandyDrop();
+            }
+        }
+
         AudioManager.instance.PlaySE();
-        //Score = Score + 1;
         Score += 1;
         Debug.Log($"Score:{Score}");
         scoreTextTMP.text = $"Score:{Score}";
-        //•Ï”–¼ other‚Á‚Ä‚È‚ÉH
-        //A.‚·‚è”²‚¯‚½‘Šè‚ÌƒRƒ‰ƒCƒ_[î•ñ
-        Debug.Log($"{other.name}‚ª‚·‚è”²‚¯‚Ü‚µ‚½B");
-        //DestoryŠÖ”
-        //Destory(”jŠü‚µ‚½‚¢ƒIƒuƒWƒFƒNƒg)
-        //ƒIƒuƒWƒFƒNƒg‚ªg—p‚µ‚Ä‚¢‚éƒƒ‚ƒŠ‚ÌŠJ•ú(ƒKƒx[ƒWƒRƒŒƒNƒVƒ‡ƒ“)‚Æ•`‰æî•ñ‚Ì”jŠü
+
+        Debug.Log($"{other.name}ãŒã™ã‚ŠæŠœã‘ã¾ã—ãŸã€‚");
         Destroy(other.gameObject);
 
- 
-        //ƒXƒRƒA‚ª10‚æ‚è‘å‚«‚­‚È‚Á‚½‚É”­“®‚·‚é
+        // ã‚¹ã‚³ã‚¢ãŒ10ã‚ˆã‚Šå¤§ãããªã£ãŸæ™‚ã«ç™ºå‹•ã™ã‚‹
         if (Score > 10)
         {
-            // != (‰E•Ó‚Æ¶•Ó‚Ì’l‚ª“¯‚¶‚Å‚È‚©‚Á‚½‚ç)
-            if (AudioManager.instance.bgmAudioSource.clip != AudioManager.instance.bgmAudioClips[1])
-            
-            AudioManager.instance.bgmAudioSource.clip = AudioManager.instance.bgmAudioClips[1];
-            AudioManager.instance.bgmAudioSource.Play();
+            // ğŸŒŸã‚¨ãƒ©ãƒ¼é˜²æ­¢ï¼šbgmAudioClipsã®ç®±ãŒ2ã¤ä»¥ä¸Šï¼ˆ0ç•ªç›®ã¨1ç•ªç›®ï¼‰ã‚ã‚‹ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹å®‰å…¨ã‚¬ãƒ¼ãƒ‰
+            if (AudioManager.instance.bgmAudioClips != null && AudioManager.instance.bgmAudioClips.Length > 1)
+            {
+                if (AudioManager.instance.bgmAudioSource.clip != AudioManager.instance.bgmAudioClips[1])
+                {
+                    AudioManager.instance.bgmAudioSource.clip = AudioManager.instance.bgmAudioClips[1];
+                    AudioManager.instance.bgmAudioSource.Play();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("AudioManagerã®bgmAudioClipsã«2æ›²ç›®ãŒç™»éŒ²ã•ã‚Œã¦ã„ãªã„ãŸã‚ã€BGMã®åˆ‡ã‚Šæ›¿ãˆã‚’ã‚¹ã‚­ãƒƒãƒ—ã—ã¾ã—ãŸã€‚");
+            }
         }
     }
 }
